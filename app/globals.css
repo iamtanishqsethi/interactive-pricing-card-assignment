@@ -1,2 +1,47 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap');
 
+@layer components {
+    .custom-range {
+        @apply w-full appearance-none bg-transparent focus:outline-none border-none;
+
+    }
+
+    .custom-range::-webkit-slider-runnable-track {
+        @apply h-2 rounded-full;
+        background: linear-gradient(to right, #a5f3eb , #e5e7eb );
+    }
+
+    .custom-range::-moz-range-track {
+        @apply h-2 rounded-full;
+        background: linear-gradient(to right, #a5f3eb, #e5e7eb);
+    }
+
+    .custom-range::-webkit-slider-thumb {
+        @apply appearance-none w-8 h-8 rounded-full cursor-pointer shadow-xl shadow-[#10d5c2];
+        margin-top: -1rem;
+        background-image: url('https://i.ibb.co/Dg4x0n7v/image.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #10d5c2;
+    }
+
+    .custom-range::-moz-range-thumb {
+        @apply appearance-none w-8 h-8 rounded-full cursor-pointer shadow-xl shadow-[#10d5c2];
+        background-image: url('https://i.ibb.co/Dg4x0n7v/image.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color:#10d5c2;
+    }
+}
+.transition-colors {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
