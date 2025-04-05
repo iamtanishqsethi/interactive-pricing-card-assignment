@@ -7,22 +7,26 @@ export default function Home() {
         price: number,
     }
     const tiers: Tier[] = [
-        { pageViews: 10000, price: 8.00 },
-        { pageViews: 50000, price: 12.00 },
-        { pageViews: 100000, price: 16.00 },
-        { pageViews: 500000, price: 24.00 },
-        { pageViews: 1000000, price: 36.00 },
+        {pageViews: 10000,price: 8.00 },
+        {pageViews:25000,price:10.00},
+        {pageViews: 50000, price: 12.00 },
+        {pageViews:75000,price:14.00},
+        {pageViews: 100000, price: 16.00 },
+        {pageViews: 500000,price: 20.00 },
+        {pageViews: 750000,price: 25.00 },
+        {pageViews: 1000000, price: 36.00 },
+        {pageViews: 5000000, price: 45.00 },
     ];
 
     const [tierIndex, setTierIndex] = useState<number>(0);
     const [isYearly, setIsYearly] = useState<boolean>(false);
     const [darkMode, setDarkMode] = useState<boolean>(false);
+    const [fadeIn, setfadeIn] = useState<boolean>(false);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-            setDarkMode(isDark)
-        }
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        setDarkMode(isDark)
+        setfadeIn(true);
     }, [])
 
 
@@ -30,9 +34,9 @@ export default function Home() {
         setDarkMode(!darkMode)
     };
 
-    const currentTier = tiers[tierIndex]
-    const pagesViewsString = `${(currentTier.pageViews/1000).toFixed(0)}K PAGEVIEWS`
-    const price=isYearly?currentTier.price*0.75*12:currentTier.price
+    const currentTier:Tier = tiers[tierIndex]
+    const pagesViewsString:string = (currentTier.pageViews/1000>999.99) ?`${(currentTier.pageViews/1000000)}M PAGEVIEWS`: `${(currentTier.pageViews/1000)}K PAGEVIEWS`
+    const price:number=isYearly?currentTier.price*0.75*12:currentTier.price
 
     return (
         <div className={`flex flex-col items-center justify-center h-screen ${darkMode ? 'bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950' : 'bg-white'} relative z-10 font-manrope space-y-8 transition-colors duration-300 overflow-hidden`}>
@@ -53,14 +57,14 @@ export default function Home() {
                     </button>
                 </div>
                 <h1
-                    className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-[#293356]'} m-2 transition-colors duration-300`}
+                    className={`text-3xl font-bold ${fadeIn?'translate-y-0 opacity-100':'translate-y-10 opacity-0'} ${darkMode ? 'text-white' : 'text-[#293356]'} m-2 transition-all duration-500 ease-in-out `}
                 >Simple, traffic-based pricing
                 </h1>
-                <p className={`${darkMode ? 'text-gray-300' : 'text-[#858fad]'} transition-colors duration-300`}>
+                <p className={`${fadeIn?'translate-y-0 opacity-100':'translate-y-10 opacity-0'} ${darkMode ? 'text-gray-300' : 'text-[#858fad]'} transition-all duration-500 ease-in-out`}>
                     Sign-up for our 30-day trial. No credit card required.
                 </p>
             </header>
-            <div className={`${darkMode ? 'bg-zinc-800' : 'bg-white'} rounded-lg shadow-xl w-full max-w-md flex flex-col items-center justify-center transition-colors duration-300`}>
+            <div className={`${fadeIn?'translate-y-0 opacity-100':'translate-y-10 opacity-0'} ${darkMode ? 'bg-zinc-800' : 'bg-white'} rounded-lg shadow-xl w-full max-w-md flex flex-col items-center justify-center transition-all duration-500`}>
                 <div className={'p-8 w-full flex flex-col items-center justify-between space-y-10'}>
                     <div className={'flex flex-col md:flex-row items-center justify-between md:items-center w-full text-[#858fad] tracking-wider'}>
                         <h1 className={`uppercase text-sm font-bold ${darkMode ? 'text-gray-300' : ''}`}>
@@ -105,7 +109,7 @@ export default function Home() {
                 <div className={`w-full h-0.5 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'} transition-colors duration-300`}></div>
 
                 <div className={'p-8 w-full'}>
-                    <div className={'flex flex-col md:flex-row items-center justify-between w-full'}>
+                    <div className={'flex flex-col space-y-8 md:space-y-0 md:flex-row items-center justify-between w-full'}>
                         <div className={'flex flex-col text-sm text-[#858fad] space-y-2'}>
                             <div className={'w-full flex items-center space-x-2'}>
                                 <img
